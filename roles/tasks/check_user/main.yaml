@@ -1,0 +1,4 @@
+- name: "Ensure user linuxadmin is present"
+  user:
+    name: linuxadmin
+    state: present
