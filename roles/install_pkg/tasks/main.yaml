@@ -1,0 +1,22 @@
+- name: "Installing Packages"
+  apt: pkg={{ item }} state=installed
+  with_items:
+  - dnsutils
+  - git
+  - vim
+  - ntp
+  - at
+  - lvm2
+
+- name: "Copying file"
+  copy: src=/home/linuxadmin/ansible/hosts dest=/home/linuxadmin/hosts owner=root group=root mode=0644
+
+- name: "Backup file"
+  shell: creates=/home/linuxadmin/hosts_backup mv /home/linuxadmin/hosts /home/linuxadmin/hosts_backup1
+  #Create can use to check if file is existed or not, if file is not exist, proceed to next action which is mv
+
+- name: "Check hostname"
+  shell: date >> hostname2.log
+  args:
+   chdir: /home/linuxadmin
+   creates: hostname2.log
